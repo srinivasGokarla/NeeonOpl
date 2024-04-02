@@ -74,6 +74,9 @@ ul {
     width: 300px;
  
   }
+  .delete-icon, .like-icon, .edit-icon:hover {
+    cursor: pointer;
+  }
   .height-lines{
     width: 0.5px;
     height: 25px;
@@ -277,6 +280,7 @@ label {
   background-color: #ccc;
   color: #000;
 }
+
 
 .cancel-btn:hover {
   background-color: #bbb;

@@ -202,7 +202,7 @@ function App() {
               </div>
               <div className="parent-btn-div">
                 <div className="button-div">
-                  <div onClick={() => handleLike(user.id)}>
+                  <div onClick={() => handleLike(user.id)} className="like-icon">
                     {user.liked ? (
                       <FontAwesomeIcon icon={solidHeart} color="red" />
                     ) : (
