@@ -15,14 +15,13 @@ import { faHeart } from "@fortawesome/free-regular-svg-icons";
 //trying to deploye
 
 // Mock JSON data changes
-var mockUserData = [
+const mockUserData = [
   {
     id: 1,
     username: "Leanne Graham",
     profilePhoto: "https://via.placeholder.com/100",
     email: "Sincere@april.biz",
     phone: "1-770-736-8031 x56442",
-    liked: false,
     companyUrl: "http://hildegard.org",
   },
   {
@@ -31,7 +30,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Shanna@melissa.tv",
     phone: "010-692-6593 x09125",
-    liked: false,
     companyUrl: "http://anastasia.net",
   },
   {
@@ -40,7 +38,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Nathan@yesenia.net",
     phone: "1-463-123-4447",
-    liked: false,
     companyUrl: "http://ramiro.info",
   },
   {
@@ -49,7 +46,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Julianne.OConner@kory.org",
     phone: "493-170-9623 x156",
-    liked: false,
     companyUrl: "http://kale.biz",
   },
   {
@@ -58,7 +54,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Lucio_Hettinger@annie.ca",
     phone: "(254)954-1289",
-    liked: false,
     companyUrl: "http://demarco.info",
   },
   {
@@ -67,7 +62,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Karley_Dach@jasper.info",
     phone: "1-477-935-8478 x6430",
-    liked: false,
     companyUrl: "http://ola.org",
   },
   {
@@ -76,7 +70,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Telly.Hoeger@billy.biz",
     phone: "210.067.6132",
-    liked: false,
     companyUrl: "http://elvis.io",
   },
   {
@@ -85,7 +78,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Sherwood@rosamond.me",
     phone: "586.493.6943 x140",
-    liked: false,
     companyUrl: "http://jacynthe.com",
   },
   {
@@ -94,7 +86,6 @@ var mockUserData = [
     profilePhoto: "https://via.placeholder.com/100",
     email: "Chaim_McDermott@dana.io",
     phone: "(775)976-6794 x41206",
-    liked: false,
     companyUrl: "http://conrad.com",
   },
   {
@@ -106,8 +97,7 @@ var mockUserData = [
     companyUrl: "http://ambrose.net",
   },
 ];
-const localStorageKey = "userData";
-var mockUserData = JSON.parse(localStorage.getItem(localStorageKey)) || [];
+
 
 function App() {
   const [userData, setUserData] = useState(mockUserData);
@@ -119,36 +109,32 @@ function App() {
       setLoading(false);
     }, 1500);
   }, []);
-  useEffect(() => {
-    
-    localStorage.setItem(localStorageKey, JSON.stringify(userData));
-  }, [userData]);
-
-  useEffect(() => {
-    localStorage.setItem(localStorageKey, JSON.stringify(userData));
-  }, [userData]);
-
+ 
 
   const handleLike = (id) => {
-    const updatedUserData = userData.map((user) =>
-      user.id === id ? { ...user, liked: !user.liked } : user
+    setUserData(
+      userData.map((user) => {
+        if (user.id === id) {
+          return { ...user, liked: !user.liked };
+        }
+        return user;
+      })
     );
-    setUserData(updatedUserData);
-    updateMockData(updatedUserData);
   };
 
   const handleEdit = (id) => {
     setEditUserId(id);
   };
 
- 
-
   const handleSaveEdit = (editedUser) => {
-    const updatedUserData = userData.map((user) =>
-      user.id === editedUser.id ? editedUser : user
+    setUserData(
+      userData.map((user) => {
+        if (user.id === editedUser.id) {
+          return editedUser;
+        }
+        return user;
+      })
     );
-    setUserData(updatedUserData);
-    updateMockData(updatedUserData);
     setEditUserId(null);
   };
 
@@ -157,12 +143,7 @@ function App() {
   };
 
   const handleDelete = (id) => {
-    const updatedUserData = userData.filter((user) => user.id !== id);
-    setUserData(updatedUserData);
-    updateMockData(updatedUserData);
-  };
-  const updateMockData = (updatedUserData) => {
-    mockUserData = [...updatedUserData];
+    setUserData(userData.filter((user) => user.id !== id));
   };
 
   return (
