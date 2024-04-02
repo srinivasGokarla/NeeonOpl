@@ -22,7 +22,7 @@ I created React Application. So, if you want to run our code then please read th
 5. Open your web browser and visit `http://localhost:3000` to view the application.
 
 ## Deployed link
-[link](https://neenop-srinivasgokarla.vercel.app/)
+[link](https://neenop-jo5odfojv-srinivasgokarla.vercel.app/)
 
 ## Technologies Used
 
